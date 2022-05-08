@@ -1,52 +1,55 @@
 import java.util.ArrayList;
 
 public class Concierge implements PapotageListener{
-    private ArrayList<Bavard> bavardsON;
-    private ArrayList<Bavard> bavardsOFF;
-    
+    private ArrayList<PapotageListener> destinataire;
+    private ArrayList<PapotageListener> destinataireOFF;
 
     public Concierge() {
-        this.bavardsON = new ArrayList<Bavard>();
-        this.bavardsOFF = new ArrayList<Bavard>();
+        this.destinataire = new ArrayList<PapotageListener>();
+    }
+
+    public void addPapotageListenerConcierge(PapotageListener PL){
+        this.destinataire.add(PL);
     }
 
     public void newBavard(){
         Bavard b = new Bavard();
         b.addPapotageListener(this);
-        bavardsON.add(b);
+        this.addPapotageListenerConcierge(b);
     }
 
     public void turnON(Bavard b){
-        for(Bavard bavard : this.bavardsOFF){
-            if(bavard==b){
-                bavardsOFF.remove(b);
-                bavardsON.add(b);
+        for(PapotageListener PL  : this.destinataireOFF){
+            if(PL==b){
+                this.destinataireOFF.remove(b);
+                this.destinataire.add(b);
             }
         }
     }
 
     public void turnOFF(Bavard b){
-        for(Bavard bavard : this.bavardsON){
+        for(PapotageListener bavard : this.destinataire){
             if(bavard==b){
-                bavardsON.remove(b);
-                bavardsOFF.add(b);
+                this.destinataire.remove(b);
+                this.destinataireOFF.add(b);
             }
         }
-    }
-
-    public void newRecu(PapotageEvent PE){
-        this.newEnvoie(PE);
     }
 
     public void newEnvoie(PapotageEvent PE){
-        for(Bavard bavard : this.bavardsON){
-            if(bavard!=PE.getSource()){
-                bavard.newEnvoie(PE);
+        System.out.println("nouveau message recu!");
+        for(PapotageListener PL : this.destinataire){
+            if(PL!=PE.getSource()){
+                PL.newEnvoie(PE);
             }
         }
     }
 
-    public Bavard getBavard(int i){
-        return this.bavardsON.get(i);
+    public PapotageListener getBavard(int i){
+        return this.destinataire.get(i);
+    }
+
+    public void newEnvoie(PapotageListener concierge,String sujet,String corps){
+
     }
 }

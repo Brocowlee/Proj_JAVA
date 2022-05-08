@@ -1,4 +1,4 @@
-//TP2 Arthur GONAY IDU3
+//PROJET Arthur GONAY/Emma ORSET IDU3
 
 public class Main {
     public static void main(String[] args) throws Exception {
@@ -8,7 +8,7 @@ public class Main {
         concierge.newBavard();
         concierge.newBavard();
         
-        concierge.getBavard(0).envoyerUnMessage(concierge,"sujet","petit message tmtc");
+        concierge.getBavard(0).newEnvoie(concierge,"sujet","petit message");
         
         }
 
