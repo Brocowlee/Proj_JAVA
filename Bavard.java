@@ -2,7 +2,8 @@ public class Bavard implements PapotageListener{
     PapotageListener ConciergeListener;
     String name;
 
-    public Bavard() {
+    public Bavard(String name) {
+        this.name=name;
     }
 
     public String getName(){
