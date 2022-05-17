@@ -45,10 +45,28 @@ public class InterfaceConnexionInscription{
         frame.add(btnConnexion);
         btnConnexion.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent ae){
-               String nameconnexionText = nameconnexion.getText();
-               System.out.println("nom connexion:"+nameconnexionText);
-               String mdpconnexionText = mdpconnexion.getText();
-               System.out.println("mdp connexion:"+mdpconnexionText);
+                String nameconnexionText = nameconnexion.getText();
+                System.out.println("nom connexion:"+nameconnexionText);
+                String mdpconnexionText = mdpconnexion.getText();
+                System.out.println("mdp connexion:"+mdpconnexionText);
+                try{
+                    Bavard bavard=bat1.getBavard(nameconnexionText);
+                    if(bavard.getMdp().equals(mdpconnexionText)){
+                        new interfaceBavard(bavard);
+                    }
+                    else{
+                        JLabel compteInexistantlabel = new JLabel("mot de passe incorrect");
+                    compteInexistantlabel.setBounds(50,125,150,20);
+                    frame.add(compteInexistantlabel);
+                    frame.repaint();
+                    }
+                }
+                catch(Exception e){
+                    JLabel compteInexistantlabel = new JLabel("nom d'utilisateur incorrect");
+                    compteInexistantlabel.setBounds(50,125,150,20);
+                    frame.add(compteInexistantlabel);
+                    frame.repaint();
+                }
             }
          });
 
@@ -79,8 +97,6 @@ public class InterfaceConnexionInscription{
                bat1.newBavard(nameInscriptionText,mdInscriptionText);
             }
          });
-        //MyJButtonActionListener instance = new MyJButtonActionListener();
-        //2ème étape
         
         
 

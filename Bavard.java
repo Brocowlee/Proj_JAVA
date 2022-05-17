@@ -15,6 +15,10 @@ public class Bavard implements PapotageListener{
         return this.name;
     }
 
+    public String getMdp(){
+        return this.mdp;
+    }
+
     public void newEnvoie(PapotageListener concierge,String sujet,String corps){
         PapotageEvent pe1=new PapotageEvent(this,sujet,corps);
         concierge.newEnvoie(pe1);
