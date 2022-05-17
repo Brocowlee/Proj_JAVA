@@ -1,9 +1,14 @@
-public class Bavard implements PapotageListener{
-    PapotageListener ConciergeListener;
-    String name;
+import java.util.ArrayList;
 
-    public Bavard(String name) {
+public class Bavard implements PapotageListener{
+    private ArrayList<Concierge> concierges;
+    String name;
+    String mdp;
+
+    public Bavard(String name,String mdp) {
         this.name=name;
+        this.mdp=mdp;
+        this.concierges = new ArrayList<Concierge>();
     }
 
     public String getName(){
@@ -15,13 +20,21 @@ public class Bavard implements PapotageListener{
         concierge.newEnvoie(pe1);
     }
 
-    public void addPapotageListener(PapotageListener ConciergeListener){
-        this.ConciergeListener=ConciergeListener;
+    public void addConcierge(Concierge concierge){
+        //addPapotageListener anciennement
+        this.concierges.add(concierge);
     }
 
 
     public void newEnvoie(PapotageEvent PE){
         System.out.println(PE.getSource()+"\n"+PE.getSujet()+"\n"+PE.getCorps()+"\n");
     }
+
+
+    @Override
+    public String toString() {
+        return  getName();
+    }
+
 
 }

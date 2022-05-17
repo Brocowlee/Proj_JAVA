@@ -1,13 +1,15 @@
 import java.util.ArrayList;
 
 public class Concierge implements PapotageListener{
+    private String name;
     private ArrayList<Bavard> destinataire;
 
-    public Concierge() {
+    public Concierge(String name) {
         this.destinataire = new ArrayList<Bavard>();
+        this.name=name;
     }
 
-    public void addPapotageListenerConcierge(Bavard bavard){
+    public void addBavard(Bavard bavard){
         this.destinataire.add(bavard);
     }
 
@@ -19,7 +21,11 @@ public class Concierge implements PapotageListener{
         }
     }
 
-    public PapotageListener getBavard(int i){
+    public String getName(){
+        return this.name;
+    }
+
+    public Bavard getBavard(int i){
         return this.destinataire.get(i);
     }
 
