@@ -1,13 +1,5 @@
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPasswordField;
-import javax.swing.JTextField;
-import java.awt.Dimension;
-import java.awt.Toolkit;
-import javax.swing.JFrame;
-
 //PROJET Arthur GONAY/Emma ORSET IDU3
+
 
 public class Main {
     public static void main(String[] args) throws Exception {
@@ -24,7 +16,7 @@ public class Main {
         //concierge.getBavard(0).newEnvoie(concierge,"sujet","petit message");
         
         new InterfaceConnexionInscription(bat1);
-
+        
         }
 
     }

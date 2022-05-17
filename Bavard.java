@@ -34,7 +34,10 @@ public class Bavard implements PapotageListener{
         System.out.println(PE.getSource()+"\n"+PE.getSujet()+"\n"+PE.getCorps()+"\n");
     }
 
-
+    public ArrayList<Concierge> getConcierges(){
+        return this.concierges;
+    } 
+    
     @Override
     public String toString() {
         return  getName();
