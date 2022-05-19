@@ -42,8 +42,11 @@ public class interfaceBavard {
             allTopics.add(conciergeNonSubMenu);
             conciergeNonSubMenu.addActionListener(new ActionListener(){
                 public void actionPerformed(ActionEvent ae){
-                    bavard.addConcierge(allConcierges);
-                    frame.repaint();
+                    System.out.println(bavard.getConcierges());
+                    bat.subscribe(bavard.getName(),allConcierges.getName());
+                    System.out.println(bavard.getConcierges());
+                    frame = settingMenuBar(bavard,bat);
+                    frame.setVisible(true);
                 }
              });
 
