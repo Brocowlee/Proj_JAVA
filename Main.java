@@ -14,7 +14,6 @@ public class Main {
         bat1.subscribe("b3", "bricolage");
         //bat1.getBavard("b1").newEnvoie(bat1.getConcierge("bricolage"), "sujetici", "corpsici");
         //concierge.getBavard(0).newEnvoie(concierge,"sujet","petit message");
-        
         new InterfaceConnexionInscription(bat1);
         
         }
