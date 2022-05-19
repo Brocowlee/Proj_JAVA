@@ -52,7 +52,7 @@ public class InterfaceConnexionInscription{
                 try{
                     Bavard bavard=bat1.getBavard(nameconnexionText);
                     if(bavard.getMdp().equals(mdpconnexionText)){
-                        new interfaceBavard(bavard);
+                        new interfaceBavard(bavard,bat1);
                     }
                     else{
                         JLabel compteInexistantlabel = new JLabel("mot de passe incorrect");

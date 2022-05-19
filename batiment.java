@@ -42,4 +42,19 @@ public class batiment {
         getConcierge(conciergeName).addBavard(getBavard(bavardName));
         getBavard(bavardName).addConcierge(getConcierge(conciergeName));
     }
+
+    public ArrayList<Concierge> getAllConcierges(){
+        return this.concierges;
+    }
+
+    public ArrayList<Concierge> getConciergesNonsubscribe(Bavard bav){
+        ArrayList<Concierge> allConciergesLst = new ArrayList<Concierge>();
+        for(Concierge allconcierges : this.getAllConcierges()){
+            System.out.println(allconcierges.getName());
+                if(!(bav.getConcierges().contains(allconcierges))){
+                    allConciergesLst.add(allconcierges);
+                }
+            }
+        return allConciergesLst;
+    }
 }

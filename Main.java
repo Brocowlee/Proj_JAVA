@@ -9,6 +9,7 @@ public class Main {
         bat1.newBavard("b3","azert");
         bat1.newBavard("b4","azert");
         bat1.newConcierges("bricolage");
+        bat1.newConcierges("jardinage");
         bat1.subscribe("b1", "bricolage");
         bat1.subscribe("b2", "bricolage");
         bat1.subscribe("b3", "bricolage");
