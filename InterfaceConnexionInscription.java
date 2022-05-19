@@ -43,33 +43,43 @@ public class InterfaceConnexionInscription{
         JButton btnConnexion = new JButton("Se connecter");
         btnConnexion.setBounds(50,150,150,30);
         frame.add(btnConnexion);
+        JLabel compteInexistantlabel = new JLabel("");
         btnConnexion.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent ae){
                 String nameconnexionText = nameconnexion.getText();
                 System.out.println("nom connexion:"+nameconnexionText);
                 String mdpconnexionText = mdpconnexion.getText();
                 System.out.println("mdp connexion:"+mdpconnexionText);
+                
                 try{
                     Bavard bavard=bat1.getBavard(nameconnexionText);
                     if(bavard.getMdp().equals(mdpconnexionText)){
                         new interfaceBavard(bavard);
                     }
                     else{
-                        JLabel compteInexistantlabel = new JLabel("mot de passe incorrect");
-                    compteInexistantlabel.setBounds(50,125,150,20);
-                    frame.add(compteInexistantlabel);
-                    frame.repaint();
+                        compteInexistantlabel.setText("mot de passe incorrect");
+                        compteInexistantlabel.setBounds(50,125,150,20);
+                        frame.add(compteInexistantlabel);
+                        frame.repaint();
+                    
                     }
                 }
                 catch(Exception e){
-                    JLabel compteInexistantlabel = new JLabel("nom d'utilisateur incorrect");
+                    
+                    compteInexistantlabel.setText("nom d'utilisateur incorrect");
                     compteInexistantlabel.setBounds(50,125,150,20);
                     frame.add(compteInexistantlabel);
                     frame.repaint();
+                    
+                    
                 }
+               
             }
+            
+        
          });
 
+        compteInexistantlabel.setText("");
         JLabel inscription = new JLabel("Inscription");
         inscription.setBounds(345,0,60,20);
         frame.add(inscription);
@@ -95,11 +105,12 @@ public class InterfaceConnexionInscription{
                String mdInscriptionText = mdInscription.getText();
                System.out.println("mdp inscription:"+mdInscriptionText);
                bat1.newBavard(nameInscriptionText,mdInscriptionText);
+               nameInscription.setText("");
+               mdInscription.setText("");
             }
          });
-        
-        
 
+        
         frame.setLayout(null);
         frame.setVisible(true);
     }
