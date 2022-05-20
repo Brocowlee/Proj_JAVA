@@ -7,18 +7,21 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
+import javax.swing.SwingUtilities;
 
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.awt.event.*;
 
 public class InterfaceConnexionInscription{
+   
     private DefaultListModel<String> liste = new DefaultListModel<>();
+
+    private static JScrollPane scrollPane = null;
     
+    private JFrame frame = new JFrame("connexion");
+
     public InterfaceConnexionInscription(batiment bat1){
-        JFrame frame = new JFrame("connexion");
         frame.pack();
   
         //récuperer la taille de l'écran
@@ -66,11 +69,13 @@ public class InterfaceConnexionInscription{
                 System.out.println("mdp connexion:"+mdpText);
                 
                 try{
-                    Bavard bavard=bat1.getBavard(nameText);
-                    if(bavard.getMdp().equals(mdpText)){
-                        new interfaceBavard(bavard,bat1);
-                        bavard.setConnected(true);
-                        frame.repaint();
+                    if(bat1.getBavard(nameText).getMdp().equals(mdpText)){
+                        new interfaceBavard(bat1.getBavard(nameText),bat1);
+                        bat1.getBavard(nameText).setConnected(true);
+                        System.out.println("ici");
+                        refresh(bat1);
+                        SwingUtilities.updateComponentTreeUI(frame);
+                        frame.setVisible(true);
                     }
                     else{
                         compteInexistantlabel.setText("mot de passe incorrect");
@@ -110,22 +115,8 @@ public class InterfaceConnexionInscription{
             }
          });
 
-         
-         for(Bavard bavard:bat1.getAllBavard()){
-             if(bavard.getConnected()){
-                liste.addElement(bavard.getName());
-             }
-         }
-         JList list = new JList(liste);
+         showList(bat1);
         
-
-        JPanel panel = new JPanel();
-        panel.add(list);
-        JScrollPane scrollPane = new JScrollPane(panel);
-        //scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
-        scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
-        scrollPane.setBounds(300, 20, 150, 200);
-        frame.add(scrollPane);
         
         // list.addListSelectionListener(new ListSelectionListener() {
         //     @Override
@@ -140,6 +131,37 @@ public class InterfaceConnexionInscription{
         frame.setLayout(null);
         frame.setVisible(true);
     }
+
+    private void showList(batiment bat){
+
+        liste.clear();
+        for(Bavard bavard : bat.getAllBavard()){
+            if(bavard.getConnected()){
+               liste.addElement(bavard.getName());
+               System.out.println(liste);
+            }
+        }
+        JList list = new JList(liste);
+        
+
+       JPanel panel = new JPanel();
+       panel.add(list);
+       scrollPane = new JScrollPane(panel);
+       scrollPane.repaint();
+       //scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
+       scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+       scrollPane.setBounds(300, 20, 150, 200);
+       frame.add(scrollPane);
+    }
+
+     public void refresh(batiment bat){
+         frame.remove(scrollPane);
+         showList(bat);
+         frame.revalidate();
+         frame.repaint();
+     }
+
+
 
 
 
