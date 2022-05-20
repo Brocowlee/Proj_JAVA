@@ -3,39 +3,31 @@ import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPasswordField;
 import javax.swing.JTextField;
-
-
-import java.awt.Dimension;
-import java.awt.Toolkit;
 import java.awt.event.*;
 
 
 public class interfaceBavard {
     JFrame frame;
 
-    public interfaceBavard(Bavard bavard) {
+    public interfaceBavard(Bavard bavard,batiment bat) {
         JFrame frame = new JFrame("Bavardage");
         this.frame=frame;
         this.frame.pack();
         this.frame.setLocationRelativeTo(null);
         this.frame.setSize(500, 500);
         this.frame.setLayout(null);
-        this.frame = settingMenuBar(bavard);
+        this.frame = settingMenuBar(bavard,bat);
         this.frame.setVisible(true);
     }
 
-    public JFrame settingMenuBar(Bavard bavard){
+    public JFrame settingMenuBar(Bavard bavard,batiment bat){
         JMenuBar menuBar = new JMenuBar();
         JMenu menu=new JMenu("mes Topics");
+        JMenu allTopics=new JMenu("Tous les topics");
         for(Concierge concierge : bavard.getConcierges()){
             JMenuItem conciergeMenu=new JMenuItem(concierge.getName());  
             menu.add(conciergeMenu);
-            System.out.println("ici");
             conciergeMenu.addActionListener(new ActionListener(){
                 public void actionPerformed(ActionEvent ae){
                     JTextField messageTextField = new JTextField();
@@ -45,11 +37,27 @@ public class interfaceBavard {
                 }
              });
         }
+        for (Concierge allConcierges : bat.getConciergesNonsubscribe(bavard)){
+            JMenuItem conciergeNonSubMenu=new JMenuItem(allConcierges.getName());
+            allTopics.add(conciergeNonSubMenu);
+            conciergeNonSubMenu.addActionListener(new ActionListener(){
+                public void actionPerformed(ActionEvent ae){
+                    System.out.println(bavard.getConcierges());
+                    bat.subscribe(bavard.getName(),allConcierges.getName());
+                    System.out.println(bavard.getConcierges());
+                    frame = settingMenuBar(bavard,bat);
+                    frame.setVisible(true);
+                }
+             });
+
+        }
 
         menuBar.add(menu);
+        menuBar.add(allTopics);
         frame.setJMenuBar(menuBar);
         return frame;
     }
 
+    
     
 }
