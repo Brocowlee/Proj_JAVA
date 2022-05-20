@@ -1,4 +1,5 @@
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
@@ -31,8 +32,14 @@ public class interfaceBavard {
             conciergeMenu.addActionListener(new ActionListener(){
                 public void actionPerformed(ActionEvent ae){
                     JTextField messageTextField = new JTextField();
-                    messageTextField.setBounds(50,100,150,20);
+                    messageTextField.setBounds(25,400,350,25);
                     frame.add(messageTextField);
+                    JButton sendButton = new JButton("Envoyer");
+                    sendButton.setBounds(375,400,100,25);
+                    frame.add(sendButton);
+                    JButton unsubscribeButton = new JButton("Se desabonner");
+                    unsubscribeButton.setBounds(350,10,125,25);
+                    frame.add(unsubscribeButton);
                     frame.repaint();
                 }
              });
@@ -42,9 +49,7 @@ public class interfaceBavard {
             allTopics.add(conciergeNonSubMenu);
             conciergeNonSubMenu.addActionListener(new ActionListener(){
                 public void actionPerformed(ActionEvent ae){
-                    System.out.println(bavard.getConcierges());
                     bat.subscribe(bavard.getName(),allConcierges.getName());
-                    System.out.println(bavard.getConcierges());
                     frame = settingMenuBar(bavard,bat);
                     frame.setVisible(true);
                 }
