@@ -1,13 +1,22 @@
+import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JList;
+import javax.swing.JPanel;
 import javax.swing.JPasswordField;
+import javax.swing.JScrollPane;
 import javax.swing.JTextField;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
+
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.awt.event.*;
 
 public class InterfaceConnexionInscription{
+    private DefaultListModel<String> liste = new DefaultListModel<>();
+    
     public InterfaceConnexionInscription(batiment bat1){
         JFrame frame = new JFrame("connexion");
         frame.pack();
@@ -98,6 +107,44 @@ public class InterfaceConnexionInscription{
                mdp.setText("");
             }
          });
+
+        //  for (String b : liste) {
+        //     liste.addElement(b);
+        // }
+
+        liste.addElement("yo");
+        liste.addElement("test");
+        liste.addElement("REACH");
+        liste.addElement("SQDQSD");
+        liste.addElement("yo");
+        liste.addElement("test");
+        liste.addElement("REACH");
+        liste.addElement("SQDQSD");
+        liste.addElement("yo");
+        liste.addElement("test");
+        liste.addElement("REACH");
+        liste.addElement("SQDQSDUUUUUjjJDZJDOOIZJD");
+        liste.addElement("yo");
+        liste.addElement("test");
+
+        JList list = new JList(liste);
+
+        JPanel panel = new JPanel();
+        panel.add(list);
+        JScrollPane scrollPane = new JScrollPane(panel);
+        scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
+        scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+        scrollPane.setBounds(300, 20, 150, 200);
+        frame.add(scrollPane);
+        
+        // list.addListSelectionListener(new ListSelectionListener() {
+        //     @Override
+        //     public void valueChanged(ListSelectionEvent arg0) {
+        //         if (!arg0.getValueIsAdjusting()) {
+        //             System.out.println(list.getSelectedValue());
+        //         }
+        //     }
+        // });
 
         
         frame.setLayout(null);
