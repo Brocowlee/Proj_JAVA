@@ -38,6 +38,10 @@ public class batiment {
         return null;
     }
 
+    public ArrayList<Bavard> getAllBavard(){
+        return this.bavards;
+    }
+
     public void subscribe(String bavardName,String conciergeName){
         getConcierge(conciergeName).addBavard(getBavard(bavardName));
         getBavard(bavardName).addConcierge(getConcierge(conciergeName));

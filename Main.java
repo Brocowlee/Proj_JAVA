@@ -8,6 +8,7 @@ public class Main {
         bat1.newBavard("b2","azert");
         bat1.newBavard("b3","azert");
         bat1.newBavard("b4","azert");
+        bat1.getBavard("b2").setConnected(true);
         bat1.newConcierges("bricolage");
         bat1.newConcierges("jardinage");
         bat1.subscribe("b1", "bricolage");

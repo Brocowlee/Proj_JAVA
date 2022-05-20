@@ -69,6 +69,8 @@ public class InterfaceConnexionInscription{
                     Bavard bavard=bat1.getBavard(nameText);
                     if(bavard.getMdp().equals(mdpText)){
                         new interfaceBavard(bavard,bat1);
+                        bavard.setConnected(true);
+                        frame.repaint();
                     }
                     else{
                         compteInexistantlabel.setText("mot de passe incorrect");
@@ -108,31 +110,19 @@ public class InterfaceConnexionInscription{
             }
          });
 
-        //  for (String b : liste) {
-        //     liste.addElement(b);
-        // }
-
-        liste.addElement("yo");
-        liste.addElement("test");
-        liste.addElement("REACH");
-        liste.addElement("SQDQSD");
-        liste.addElement("yo");
-        liste.addElement("test");
-        liste.addElement("REACH");
-        liste.addElement("SQDQSD");
-        liste.addElement("yo");
-        liste.addElement("test");
-        liste.addElement("REACH");
-        liste.addElement("SQDQSDUUUUUjjJDZJDOOIZJD");
-        liste.addElement("yo");
-        liste.addElement("test");
-
-        JList list = new JList(liste);
+         
+         for(Bavard bavard:bat1.getAllBavard()){
+             if(bavard.getConnected()){
+                liste.addElement(bavard.getName());
+             }
+         }
+         JList list = new JList(liste);
+        
 
         JPanel panel = new JPanel();
         panel.add(list);
         JScrollPane scrollPane = new JScrollPane(panel);
-        scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
+        //scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
         scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
         scrollPane.setBounds(300, 20, 150, 200);
         frame.add(scrollPane);

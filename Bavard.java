@@ -4,6 +4,7 @@ public class Bavard implements PapotageListener{
     private ArrayList<Concierge> concierges;
     String name;
     String mdp;
+    boolean connected;
 
     public Bavard(String name,String mdp) {
         this.name=name;
@@ -17,6 +18,14 @@ public class Bavard implements PapotageListener{
 
     public String getMdp(){
         return this.mdp;
+    }
+
+    public boolean getConnected(){
+        return this.connected;
+    }
+
+    public void setConnected(boolean etat){
+        this.connected=etat;
     }
 
     public void newEnvoie(PapotageListener concierge,String sujet,String corps){
