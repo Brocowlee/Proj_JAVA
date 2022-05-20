@@ -32,4 +32,8 @@ public class Concierge implements PapotageListener{
     public void newEnvoie(PapotageListener concierge,String sujet,String corps){
 
     }
+
+    public void removeBavard(Bavard bavard) {
+        this.destinataire.remove(bavard);
+    }
 }

@@ -43,5 +43,9 @@ public class Bavard implements PapotageListener{
         return  getName();
     }
 
+    public void removeConcierge(Concierge concierge) {
+        this.concierges.remove(concierge);
+    }
+
 
 }

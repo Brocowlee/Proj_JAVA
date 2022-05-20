@@ -43,6 +43,11 @@ public class batiment {
         getBavard(bavardName).addConcierge(getConcierge(conciergeName));
     }
 
+    public void unSubscribe(String bavardName,String conciergeName){
+        getConcierge(conciergeName).removeBavard(getBavard(bavardName));
+        getBavard(bavardName).removeConcierge(getConcierge(conciergeName));
+    }
+
     public ArrayList<Concierge> getAllConcierges(){
         return this.concierges;
     }
@@ -50,7 +55,6 @@ public class batiment {
     public ArrayList<Concierge> getConciergesNonsubscribe(Bavard bav){
         ArrayList<Concierge> allConciergesLst = new ArrayList<Concierge>();
         for(Concierge allconcierges : this.getAllConcierges()){
-            System.out.println(allconcierges.getName());
                 if(!(bav.getConcierges().contains(allconcierges))){
                     allConciergesLst.add(allconcierges);
                 }
