@@ -16,9 +16,7 @@ import java.awt.event.*;
 public class InterfaceConnexionInscription{
    
     private DefaultListModel<String> liste = new DefaultListModel<>();
-
     private static JScrollPane scrollPane = null;
-    
     private JFrame frame = new JFrame("connexion");
 
     public InterfaceConnexionInscription(batiment bat1){
@@ -67,6 +65,8 @@ public class InterfaceConnexionInscription{
                 System.out.println("nom connexion:"+nameText);
                 String mdpText = mdp.getText();
                 System.out.println("mdp connexion:"+mdpText);
+                name.setText("");
+                mdp.setText("");
                 
                 try{
                     if(bat1.getBavard(nameText).getMdp().equals(mdpText)){
@@ -109,7 +109,9 @@ public class InterfaceConnexionInscription{
                System.out.println("nom inscription:"+nameText);
                String mdpText = mdp.getText();
                System.out.println("mdp inscription:"+mdpText);
+               System.out.println(bat1.getAllBavard());
                bat1.newBavard(nameText,mdpText);
+               System.out.println(bat1.getAllBavard());
                name.setText("");
                mdp.setText("");
             }
@@ -148,7 +150,6 @@ public class InterfaceConnexionInscription{
        panel.add(list);
        scrollPane = new JScrollPane(panel);
        scrollPane.repaint();
-       //scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
        scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
        scrollPane.setBounds(300, 20, 150, 200);
        frame.add(scrollPane);
