@@ -13,7 +13,7 @@ public class Main {
         //bat1.subscribe("b1", "bricolage");
         bat1.subscribe("b2", "bricolage");
         bat1.subscribe("b3", "bricolage");
-        bat1.getBavard("b1").newEnvoie(bat1.getConcierge("bricolage"), "sujetici", "corpsiciggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggg");
+        bat1.getBavard("b1").newEnvoie(bat1.getConcierge("bricolage"), "sujetici", "corpsiciggggggggggggggggggggg");
         bat1.getBavard("b1").newEnvoie(bat1.getConcierge("bricolage"), "sujetici", "corpsicigggggggggggggggg2ggggggggggggggggggggggggggg");
         bat1.getBavard("b1").newEnvoie(bat1.getConcierge("bricolage"), "sujetici", "corpsicigggggggggggggggg2gggggg3gggggggggggggggggggg");
         bat1.getBavard("b1").newEnvoie(bat1.getConcierge("bricolage"), "sujetici", "corpsicigggggggggggggggg2gggggg3gggggggggggggggggggg");

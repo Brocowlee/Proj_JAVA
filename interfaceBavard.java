@@ -1,10 +1,14 @@
 
+import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JList;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import java.awt.event.*;
 
@@ -14,7 +18,9 @@ public class interfaceBavard {
     Concierge currentConcierge = null;
     private static JLabel currentConciergeLabel = new JLabel("");
     private Bavard currentBavard;
-    private batiment bat; 
+    private batiment bat;
+    private static JScrollPane scrollPane = null;
+    private DefaultListModel<String> liste = new DefaultListModel<>(); 
 
 
     public JFrame getFrame() {
@@ -140,6 +146,7 @@ public class interfaceBavard {
         sendButton.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent ae){
                 getCurrentBavard().newEnvoie(getCurrentConcierge(), sujetTextField.getText(), corpTextField.getText());
+                refreshMessage();
             }
             });
 
@@ -164,23 +171,28 @@ public class interfaceBavard {
         frame.repaint();
 }
     private void showAllMessages(){
-        if(getCurrentConcierge().getLastMessages().size()<3){
-            for(int i = 0 ; i<getCurrentConcierge().getLastMessages().size() ; i++){
-                showMessage(i, getCurrentConcierge().getLastMessages().get(getCurrentConcierge().getLastMessages().size()-i-1));
-            }
-    }
-    else{
-        for(int i = 0 ; i<3 ; i++){
-            showMessage(i, getCurrentConcierge().getLastMessages().get(getCurrentConcierge().getLastMessages().size()-i-1));
+        liste.clear();
+        for(int i=0;i<currentConcierge.getLastMessages().size() && i<15;i++){
+            liste.addElement("From: "+currentConcierge.getLastMessages().get(i).getSource());
+            liste.addElement("Sujet: "+currentConcierge.getLastMessages().get(i).getSujet());
+            liste.addElement("Corps: "+currentConcierge.getLastMessages().get(i).getCorps());
+            liste.addElement(" ");
         }
-    }
+        JList list = new JList(liste);
+        JPanel panel = new JPanel();
+        panel.add(list);
+        scrollPane = new JScrollPane(panel);
+        scrollPane.repaint();
+        scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+        scrollPane.setBounds(25, 50, 450, 225);
+        frame.add(scrollPane);
     }
 
-    private void showMessage(int num,PapotageEvent PE){
-        JLabel message=new JLabel("<html><body>From: "+PE.getSource()+"<br>Sujet: "+PE.getSujet()+"<br>Corps: "+PE.getCorps()+"</html></body>");
-        message.setBounds(25,200-(num*75),450,100);
-        System.out.println(PE.getCorps());
-        frame.add(message);
+    private void refreshMessage(){
+        frame.remove(scrollPane);
+        showAllMessages();
+        frame.revalidate();
+        frame.repaint();
     }
 
 }

@@ -139,7 +139,6 @@ public class InterfaceConnexionInscription{
         for(Bavard bavard : bat.getAllBavard()){
             if(bavard.getConnected()){
                liste.addElement(bavard.getName());
-               System.out.println(liste);
             }
         }
         JList list = new JList(liste);
@@ -155,10 +154,10 @@ public class InterfaceConnexionInscription{
     }
 
      public void refresh(batiment bat){
-         frame.remove(scrollPane);
-         showList(bat);
-         frame.revalidate();
-         frame.repaint();
+        //  frame.remove(scrollPane);
+        //  showList(bat);
+        //  frame.revalidate();
+        //  frame.repaint();
      }
 
 
