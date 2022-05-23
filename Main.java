@@ -8,13 +8,12 @@ public class Main {
         bat1.newBavard("b2","azert");
         bat1.newBavard("b3","azert");
         bat1.newBavard("b4","azert");
-        bat1.getBavard("b2").setConnected(true);
         bat1.newConcierges("bricolage");
         bat1.newConcierges("jardinage");
         //bat1.subscribe("b1", "bricolage");
         bat1.subscribe("b2", "bricolage");
         bat1.subscribe("b3", "bricolage");
-        //bat1.getBavard("b1").newEnvoie(bat1.getConcierge("bricolage"), "sujetici", "corpsici");
+        bat1.getBavard("b1").newEnvoie(bat1.getConcierge("bricolage"), "sujetici", "corpsicigggggggggggggggggg");
         //concierge.getBavard(0).newEnvoie(concierge,"sujet","petit message");
         new InterfaceConnexionInscription(bat1);
         

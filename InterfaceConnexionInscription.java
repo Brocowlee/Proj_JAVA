@@ -72,7 +72,6 @@ public class InterfaceConnexionInscription{
                     if(bat1.getBavard(nameText).getMdp().equals(mdpText)){
                         new interfaceBavard(bat1.getBavard(nameText),bat1);
                         bat1.getBavard(nameText).setConnected(true);
-                        System.out.println("ici");
                         refresh(bat1);
                         SwingUtilities.updateComponentTreeUI(frame);
                         frame.setVisible(true);

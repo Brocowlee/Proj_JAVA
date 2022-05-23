@@ -129,7 +129,11 @@ public class interfaceBavard {
         JButton sendButton = new JButton("Envoyer");
         sendButton.setBounds(375,400,100,25);
         frame.add(sendButton);
-        showAllMessages();
+        System.out.println(currentConcierge.getLastMessages().size()!=0);
+        if(currentConcierge.getLastMessages().size()!=0){
+            showAllMessages();
+            System.out.println("test"+currentConcierge.getLastMessages().get(0).getCorps());
+        }
         frame.repaint();
         refreshJLabel();
         
@@ -161,14 +165,18 @@ public class interfaceBavard {
         frame.repaint();
 }
     private void showAllMessages(){
-        for(int i = 0 ; i>3 ; i++){
-            showMessage(i, getCurrentConcierge().getLastMessages().get(getCurrentConcierge().getLastMessages().size()-i));
-        }
+        if(getCurrentConcierge().getLastMessages().size()<3){
+            for(int i = 0 ; i<getCurrentConcierge().getLastMessages().size() ; i++){
+                showMessage(i, getCurrentConcierge().getLastMessages().get(getCurrentConcierge().getLastMessages().size()-i-1));
+            }
+    }
     }
 
     private void showMessage(int num,PapotageEvent PE){
-        JLabel message=new JLabel("From: "+PE.getSource()+"\nSujet: "+PE.getSujet()+"\nCorps: "+PE.getCorps());
-        message.setBounds(25,275-(num*50),125,50);
+        JLabel message=new JLabel("<html><body>From: "+PE.getSource()+"<br>Sujet: "+PE.getSujet()+"<br>Corps: "+PE.getCorps()+"</html></body>");
+        //message.setBounds(25,275-(num*50),125,50);
+        message.setBounds(25,200,200,75);
+        System.out.println(PE.getCorps());
         frame.add(message);
     }
 }
