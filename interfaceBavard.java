@@ -80,7 +80,6 @@ public class interfaceBavard {
             @Override
             public void windowClosing(WindowEvent event) {
                 exitProcedure();
-                
                 }
 
             private void exitProcedure() {
