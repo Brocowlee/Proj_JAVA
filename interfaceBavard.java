@@ -89,15 +89,6 @@ public class interfaceBavard {
             }
             });
             
-        Runnable helloRunnable = new Runnable() {
-            public void run() {
-                refreshMessage();
-                System.out.println("test");
-            }
-        };
-        
-        ScheduledExecutorService executor = Executors.newScheduledThreadPool(1);
-        executor.scheduleAtFixedRate(helloRunnable, 0, 3, TimeUnit.SECONDS);
     }
 
 
@@ -139,8 +130,6 @@ public class interfaceBavard {
     }
 
     private void setJLabel(){
-        //JLabel contenant l'information du currentConcierge
-        //JLabel currentConciergeLabel = new JLabel(getCurrentConcierge().getName());
         setCurrentConciergeLabel(new JLabel(getCurrentConcierge().getName()));
         currentConciergeLabel.setBounds(275,10,125,25);
         frame.add(currentConciergeLabel);
@@ -201,7 +190,7 @@ public class interfaceBavard {
 }
     private void showAllMessages(){
         liste.clear();
-        for(int i=0;i<=currentConcierge.getLastMessages().size() && i<15;i++){
+        for(int i=0;i<currentConcierge.getLastMessages().size() && i<15;i++){
             liste.addElement("From: "+currentConcierge.getLastMessages().get(i).getSource());
             liste.addElement("Sujet: "+currentConcierge.getLastMessages().get(i).getSujet());
             liste.addElement("Corps: "+currentConcierge.getLastMessages().get(i).getCorps());
@@ -218,9 +207,7 @@ public class interfaceBavard {
     }
 
     private void refreshMessage(){
-        if(scrollPane != null){
-            frame.remove(scrollPane);
-        }
+        frame.remove(scrollPane);
         showAllMessages();
         frame.revalidate();
         frame.repaint();
