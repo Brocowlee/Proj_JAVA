@@ -12,6 +12,11 @@ import javax.swing.SwingUtilities;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.awt.event.*;
+import java.util.Timer;
+import java.util.TimerTask;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 public class InterfaceConnexionInscription{
    
@@ -21,7 +26,6 @@ public class InterfaceConnexionInscription{
 
     public InterfaceConnexionInscription(batiment bat1){
         frame.pack();
-  
         //récuperer la taille de l'écran
         Dimension tailleEcran = Toolkit.getDefaultToolkit().getScreenSize();
         int height = tailleEcran.height;
@@ -114,27 +118,24 @@ public class InterfaceConnexionInscription{
                name.setText("");
                mdp.setText("");
             }
-         });
+        });
 
-         showList(bat1);
+        Runnable helloRunnable = new Runnable() {
+            public void run() {
+                refresh(bat1);
+            }
+        };
         
-        
-        // list.addListSelectionListener(new ListSelectionListener() {
-        //     @Override
-        //     public void valueChanged(ListSelectionEvent arg0) {
-        //         if (!arg0.getValueIsAdjusting()) {
-        //             System.out.println(list.getSelectedValue());
-        //         }
-        //     }
-        // });
+        ScheduledExecutorService executor = Executors.newScheduledThreadPool(1);
+        executor.scheduleAtFixedRate(helloRunnable, 0, 3, TimeUnit.SECONDS);
 
-        
+        showList(bat1); 
         frame.setLayout(null);
         frame.setVisible(true);
+
     }
 
     private void showList(batiment bat){
-
         liste.clear();
         for(Bavard bavard : bat.getAllBavard()){
             if(bavard.getConnected()){
@@ -154,14 +155,13 @@ public class InterfaceConnexionInscription{
     }
 
      public void refresh(batiment bat){
-        //  frame.remove(scrollPane);
-        //  showList(bat);
-        //  frame.revalidate();
-        //  frame.repaint();
+         if(scrollPane != null){
+             frame.remove(scrollPane);
+         }
+         showList(bat);
+         frame.revalidate();
+         frame.repaint();
      }
-
-
-
 
 
 }

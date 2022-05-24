@@ -9,8 +9,12 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import java.awt.event.*;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 
 public class interfaceBavard {
@@ -70,7 +74,30 @@ public class interfaceBavard {
         this.frame.setSize(500, 500);
         this.frame.setLayout(null);
         this.frame = settingMenuBar();
-        this.frame.setVisible(true);    
+        this.frame.setVisible(true);
+        frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+        frame.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent event) {
+                exitProcedure();
+                
+                }
+
+            private void exitProcedure() {
+                currentBavard.setConnected(false);
+                frame.dispose();
+            }
+            });
+            
+        Runnable helloRunnable = new Runnable() {
+            public void run() {
+                refreshMessage();
+                System.out.println("test");
+            }
+        };
+        
+        ScheduledExecutorService executor = Executors.newScheduledThreadPool(1);
+        executor.scheduleAtFixedRate(helloRunnable, 0, 3, TimeUnit.SECONDS);
     }
 
 
@@ -87,6 +114,7 @@ public class interfaceBavard {
                 public void actionPerformed(ActionEvent ae){
                     setCurrentConcierge(concierge);
                     setFenetreEnvoie();
+                    refreshMessage();
                 }
              });
         }
@@ -126,7 +154,7 @@ public class interfaceBavard {
     }
 
     private void setFenetreEnvoie(){
-        JTextField corpTextField = new JTextField();
+        JTextArea corpTextField = new JTextArea();
         corpTextField.setBounds(25,325,450,75);
         frame.add(corpTextField);
         JTextField sujetTextField = new JTextField();
@@ -164,6 +192,7 @@ public class interfaceBavard {
                 frame.revalidate();
                 frame.repaint();
                 frame.setVisible(true);
+                refreshMessage();
             }
             });
 
@@ -172,12 +201,12 @@ public class interfaceBavard {
 }
     private void showAllMessages(){
         liste.clear();
-        for(int i=0;i<currentConcierge.getLastMessages().size() && i<15;i++){
+        for(int i=0;i<=currentConcierge.getLastMessages().size() && i<15;i++){
             liste.addElement("From: "+currentConcierge.getLastMessages().get(i).getSource());
             liste.addElement("Sujet: "+currentConcierge.getLastMessages().get(i).getSujet());
             liste.addElement("Corps: "+currentConcierge.getLastMessages().get(i).getCorps());
             liste.addElement(" ");
-        }
+    }
         JList list = new JList(liste);
         JPanel panel = new JPanel();
         panel.add(list);
@@ -189,7 +218,9 @@ public class interfaceBavard {
     }
 
     private void refreshMessage(){
-        frame.remove(scrollPane);
+        if(scrollPane != null){
+            frame.remove(scrollPane);
+        }
         showAllMessages();
         frame.revalidate();
         frame.repaint();
