@@ -12,10 +12,6 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import java.awt.event.*;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
-
 
 public class interfaceBavard {
     JFrame frame=new JFrame("Bavardage");
@@ -69,6 +65,7 @@ public class interfaceBavard {
     public interfaceBavard(Bavard bavard,batiment bat) {
         this.frame.pack();
         this.currentBavard=bavard;
+        this.frame.setTitle(bavard.getName());
         this.bat=bat;
         this.frame.setLocationRelativeTo(null);
         this.frame.setSize(500, 500);
@@ -129,9 +126,11 @@ public class interfaceBavard {
     }
 
     private void setJLabel(){
-        setCurrentConciergeLabel(new JLabel(getCurrentConcierge().getName()));
-        currentConciergeLabel.setBounds(275,10,125,25);
-        frame.add(currentConciergeLabel);
+        if(currentConcierge!=null){
+            setCurrentConciergeLabel(new JLabel(getCurrentConcierge().getName()));
+            currentConciergeLabel.setBounds(275,10,125,25);
+            frame.add(currentConciergeLabel);
+        }
     }
 
     private void refreshJLabel(){
@@ -151,7 +150,9 @@ public class interfaceBavard {
         JButton sendButton = new JButton("Envoyer");
         sendButton.setBounds(375,400,100,25);
         frame.add(sendButton);
-        System.out.println(currentConcierge.getLastMessages().size()!=0);
+        JButton reloadButton = new JButton("Actualiser");
+        reloadButton.setBounds(25,400,100,25);
+        frame.add(reloadButton);
         if(currentConcierge.getLastMessages().size()!=0){
             showAllMessages();
         }
@@ -161,8 +162,18 @@ public class interfaceBavard {
 
         sendButton.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent ae){
+                if(currentConcierge!=null){
                 getCurrentBavard().newEnvoie(getCurrentConcierge(), sujetTextField.getText(), corpTextField.getText());
                 refreshMessage();
+                }
+            }
+            });
+
+        reloadButton.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent ae){
+                if(currentConcierge!=null){
+                    refreshMessage();
+                }
             }
             });
 
@@ -173,7 +184,6 @@ public class interfaceBavard {
         unsubscribeButton.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent ae){
                 getBat().unSubscribe(getCurrentBavard().getName(), currentConcierge.getName());
-                getCurrentBavard().setConnected(false);
                 setCurrentConcierge(null);
                 currentConciergeLabel.setText("");
                 frame = settingMenuBar();
@@ -189,12 +199,14 @@ public class interfaceBavard {
 }
     private void showAllMessages(){
         liste.clear();
-        for(int i=0;i<currentConcierge.getLastMessages().size() && i<15;i++){
-            liste.addElement("From: "+currentConcierge.getLastMessages().get(i).getSource());
-            liste.addElement("Sujet: "+currentConcierge.getLastMessages().get(i).getSujet());
-            liste.addElement("Corps: "+currentConcierge.getLastMessages().get(i).getCorps());
-            liste.addElement(" ");
-    }
+        if(getCurrentConcierge()!=null){
+            for(int i=0;i<currentConcierge.getLastMessages().size() && i<15;i++){
+                liste.addElement("From: "+currentConcierge.getLastMessages().get(i).getSource());
+                liste.addElement("Sujet: "+currentConcierge.getLastMessages().get(i).getSujet());
+                liste.addElement("Corps: "+currentConcierge.getLastMessages().get(i).getCorps());
+                liste.addElement(" ");
+        }
+}
         JList list = new JList(liste);
         JPanel panel = new JPanel();
         panel.add(list);
