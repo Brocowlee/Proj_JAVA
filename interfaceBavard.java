@@ -18,7 +18,7 @@ public class interfaceBavard {
     Concierge currentConcierge = null;
     private static JLabel currentConciergeLabel = new JLabel("");
     private Bavard currentBavard;
-    private batiment bat;
+    private Batiment bat;
     private static JScrollPane scrollPane = null;
     private DefaultListModel<String> liste = new DefaultListModel<>(); 
 
@@ -52,17 +52,17 @@ public class interfaceBavard {
         this.currentBavard = currentBavard;
     }
 
-    public batiment getBat() {
+    public Batiment getBat() {
         return this.bat;
     }
 
-    public void setBat(batiment bat) {
+    public void setBat(Batiment bat) {
         this.bat = bat;
     }
 
 
 
-    public interfaceBavard(Bavard bavard,batiment bat) {
+    public interfaceBavard(Bavard bavard,Batiment bat) {
         this.frame.pack();
         this.currentBavard=bavard;
         this.frame.setTitle(bavard.getName());

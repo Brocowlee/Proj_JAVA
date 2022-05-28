@@ -1,12 +1,12 @@
 import java.util.ArrayList;
 
-public class batiment {
+public class Batiment {
     private ArrayList<Concierge> concierges;
     private ArrayList<Bavard> bavards;
     
 
 
-    public batiment() {
+    public Batiment() {
         this.concierges = new ArrayList<Concierge>();
         this.bavards = new ArrayList<Bavard>();
     }

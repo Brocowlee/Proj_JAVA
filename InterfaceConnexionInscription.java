@@ -22,7 +22,7 @@ public class InterfaceConnexionInscription{
     private static JScrollPane scrollPane = null;
     private JFrame frame = new JFrame("connexion");
 
-    public InterfaceConnexionInscription(batiment bat1){
+    public InterfaceConnexionInscription(Batiment bat1){
         frame.pack();
         //récuperer la taille de l'écran
         Dimension tailleEcran = Toolkit.getDefaultToolkit().getScreenSize();
@@ -133,7 +133,7 @@ public class InterfaceConnexionInscription{
 
     }
 
-    private void showList(batiment bat){
+    private void showList(Batiment bat){
         liste.clear();
         for(Bavard bavard : bat.getAllBavard()){
             if(bavard.getConnected()){
@@ -152,7 +152,7 @@ public class InterfaceConnexionInscription{
        frame.add(scrollPane);
     }
 
-     public void refresh(batiment bat){
+     public void refresh(Batiment bat){
          if(scrollPane != null){
              frame.remove(scrollPane);
          }
